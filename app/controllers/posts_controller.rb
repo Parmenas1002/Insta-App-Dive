@@ -12,9 +12,9 @@ class PostsController < ApplicationController
         render :new
     else
         if @post.save
-            redirect_to posts_path, notice: "New post created"
+          redirect_to posts_path, notice: "New post created"
         else
-            render :new
+          render :new
         end
     end
   end
@@ -29,9 +29,9 @@ class PostsController < ApplicationController
   end
   def update
     if @post.update(post_params)
-        redirect_to posts_path, notice: "Post update with success"
+      redirect_to posts_path, notice: "Post update with success"
     else
-        render :edit
+      render :edit
     end
   end
   def destroy

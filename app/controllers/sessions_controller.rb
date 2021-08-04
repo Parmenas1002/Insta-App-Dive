@@ -5,11 +5,11 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
-        session[:user_id]= user.id
-        redirect_to posts_path, notice: "Happy to see you again #{user.name}"
+      session[:user_id]= user.id
+      redirect_to posts_path, notice: "Happy to see you again #{user.name}"
     else
-        flash.now[:danger] = "Please enter correct login details."
-        render :new
+      flash.now[:danger] = "Please enter correct login details."
+      render :new
     end
   end
   def destroy

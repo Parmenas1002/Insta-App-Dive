@@ -7,23 +7,23 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-        redirect_to new_session_path, notice: "Welcome #{@user.name}"
+      redirect_to new_session_path, notice: "Welcome #{@user.name}"
     else  
-        render :new
+      render :new
     end
   end
   def show
     if current_user.id != @user.id
-        render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
+      render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
     end
   end
   def edit
   end
   def update
     if @user.update(user_params)
-        redirect_to user_path, notice: "Update informations with success"
+      redirect_to user_path, notice: "Update informations with success"
     else
-        render :edit
+      render :edit
     end
   end
   private
