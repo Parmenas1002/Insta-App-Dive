@@ -25,4 +25,7 @@ ActiveRecord::Schema.define(version: 2021_08_02_124202) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "favorites", "posts"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "posts", "users"
 end

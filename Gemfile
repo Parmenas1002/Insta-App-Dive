@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 gem 'mini_magick', '~> 4.8'
 gem 'carrierwave', '~> 2.0'
+gem 'faker'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

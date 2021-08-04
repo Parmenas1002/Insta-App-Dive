@@ -5,5 +5,9 @@ class User < ApplicationRecord
                 uniqueness: true
                 
     has_secure_password
-    validates :password, presence: true, length: { minimum:8 }
+    validates :password, presence: true, length: { minimum:8 }, unless: Proc.new { |user| user.password.blank? }
+    mount_uploader :image, ImageUploader
+    has_many :posts
+    has_many :favorites, dependent: :destroy
+    has_many :favorites_posts, through: :favorites, source: :post
 end
