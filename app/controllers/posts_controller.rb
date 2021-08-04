@@ -12,7 +12,6 @@ class PostsController < ApplicationController
             render :new
         else
             if @post.save
-                RegisterMailer.register_mail(@post).deliver
                 redirect_to posts_path, notice: "New post created"
             else
                 render :new
