@@ -18,16 +18,13 @@
             <ul class="tab nav justify-content-center">
                 <li class="select nav-item">Posts</li>
                 <li class="nav-item">Favorites Posts</li>
-            </ul>
-            
+            </ul>           
             <div class="content mt-4">
-                <div class="list-posts row justify-content-center">
-                    
+                <div class="list-posts row justify-content-center">  
                     <% @user.posts.each do |post|%>
                         <div class= "col-md-4">
                             <%= image_tag(post.image.url) %>
-                        </div>
-                        
+                        </div>                        
                     <% end %>
                 </div>
                 <div class=" list-posts hide row justify-content-center">
@@ -35,16 +32,12 @@
                         <div class= "col-md-4">
                             <%= image_tag(post.image.url)%>
                         </div>
-                    <% end %>
-                    
+                    <% end %>                   
                 </div>
-            </div>
-            
+            </div>            
         </div>
-    </div>
-    
+    </div>    
 </div>
-
 <script>
     $(function(){
     $('.tab li').on('click',function(){

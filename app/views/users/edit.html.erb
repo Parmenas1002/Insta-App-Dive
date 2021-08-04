@@ -25,7 +25,6 @@
                             <% end %>
                             <p class="text-downcase semi-info font-weight-bold mt-2"><%= @user.name %></p>
                         </div>
-                        
                         <%= form_with(model: @user, local: true) do |form| %>
                         <div class= "form-group mt-3 text-center image-text">
                             <%= form.label :image ,"Edit profile photo"%>
@@ -38,18 +37,14 @@
                         <div class="form-group">
                             <%= form.label :email %><%= form.text_field :email, class: "form-control"%>
                         </div>
-                        
-                        
                         <div class="row justify-content-center mb-3 mt-5">
                             <div class="col-md-12 text-center">
                                 <%= form.submit "Save Profile", class:"btn btn-primary font-weight-bold pl-5 pr-5" %>
                             </div>
-                        </div>
-                         
+                        </div>                         
                     <% end %>
                     </div>
-                </div>
-                    
+                </div>               
                 </div>  
             </div>
         </div> 

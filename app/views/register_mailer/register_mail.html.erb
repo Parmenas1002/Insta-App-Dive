@@ -1,9 +1,7 @@
 <h1><%= @post.user.name %>, You add a new post </h1>
-
 <% if @post.content != "" %>
     <p> <%= @post.content %> </p> 
 <% end %>
-
 <div class="email-img">
     <%= image_tag(@post.image.url)%>
 </div>

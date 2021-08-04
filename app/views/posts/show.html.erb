@@ -20,7 +20,6 @@
                     <%= link_to 'Delete Favorite', favorite_path(@favorite.id), method: :delete, class: 'btn btn-danger'%>
                 <% else %>
                     <p><%= link_to 'Add to favorite', favorites_path(post_id: @post.id), method: :post, class: 'btn btn-primary' %></p>
-                    
                 <% end %>
             <% end %>
             <li class="nav-item">
