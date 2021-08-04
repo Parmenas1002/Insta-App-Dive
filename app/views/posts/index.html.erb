@@ -1,0 +1,70 @@
+
+
+<div class="container-fluid mt-5">
+    <div class="row justify-content-around align-content-center ">
+        <div class= "col-lg-5 col-md-8">
+            <div class="row justify-content-center align-content-center ">
+                <% @posts.each do |post| %>
+                    <div class= "col-md-12 pl-5 pr-5">
+                        <div class="card mb-5 bg-white" >
+                            <div class="card-header pl-4 pb-0" style="border: none; background-color:white;">
+                                <div class="row justify-content-between align-content-center">
+                                    <div class= "col-md-4 pl-3 pr-3">
+                                        <% if post.user.image && post.user.image.url%>
+                                            <%= image_tag (post.user.image.url), class: "rounded-circle" %> <span class="pl-2 font-weight-bold" style="font-size: 16px; color:#364D59;"><%= post.user.name %></span>
+                                        <%else%>
+                                            <%= image_tag "default.png", width: 100, class: "rounded-circle" %> <span class="pl-2 font-weight-bold" style="font-size: 16px; color:#364D59;"><%= post.user.name %></span>
+                                        <% end %>
+                                    </div>
+                                    <div class= "col-md-6 pt-4">
+                                        <ul class="nav justify-content-end ">
+                                            <li class="nav-item pr-3 ">
+                                                <%= link_to  'Details' , post_path(post.id), class: "card-menu-link"   %>
+                                            </li>
+                                            <% if post.user_id == current_user.id %>
+                                                <li class="nav-item pr-3 ">
+                                                    <%= link_to  'Edit' , edit_post_path(post.id), class: "card-menu-link"  %>
+                                                </li>
+                                                <li><%= link_to  'Delete' , post_path(post.id), method: :delete , data: { confirm: 'Are you sure to delete'}, class: "card-menu-link" %></li>
+                                            <% end %>   
+                                        </ul> 
+                                    </div>
+                                </div> 
+                            </div>
+                            
+                            <div class="card-body p-0 mt-3">
+                                <div class="text-center">
+                                    <%= image_tag (post.image.url), class: "post-img" %>
+                                    <% unless current_user.id == post.user.id %>
+                                        <% if current_user.favorites.find_by(post_id: post.id).present?%>
+                                            <%= link_to favorite_path(current_user.favorites.find_by(post_id: post.id).id),  method: :delete do%>
+                                                <p class= "mt-3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="40" height="40" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path d="M923 283.6a260.04 260.04 0 0 0-56.9-82.8a264.4 264.4 0 0 0-84-55.5A265.34 265.34 0 0 0 679.7 125c-49.3 0-97.4 13.5-139.2 39c-10 6.1-19.5 12.8-28.5 20.1c-9-7.3-18.5-14-28.5-20.1c-41.8-25.5-89.9-39-139.2-39c-35.5 0-69.9 6.8-102.4 20.3c-31.4 13-59.7 31.7-84 55.5a258.44 258.44 0 0 0-56.9 82.8c-13.9 32.3-21 66.6-21 101.9c0 33.3 6.8 68 20.3 103.3c11.3 29.5 27.5 60.1 48.2 91c32.8 48.9 77.9 99.9 133.9 151.6c92.8 85.7 184.7 144.9 188.6 147.3l23.7 15.2c10.5 6.7 24 6.7 34.5 0l23.7-15.2c3.9-2.5 95.7-61.6 188.6-147.3c56-51.7 101.1-102.7 133.9-151.6c20.7-30.9 37-61.5 48.2-91c13.5-35.3 20.3-70 20.3-103.3c.1-35.3-7-69.6-20.9-101.9z" fill="red"/></svg></p>
+                                                
+                                            <% end %>
+                                            
+                                        <%else%>
+                                            <%= link_to favorites_path(post_id: post.id),  method: :post do%>
+                                                <p class= "mt-3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="40" height="40" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385c.92 1.815 2.834 3.989 6.286 6.357c3.452-2.368 5.365-4.542 6.286-6.357c.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></g></svg></p>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                    
+                                    
+                                    <p class="text-justify pl-3 mt-3">
+                                    <span class=" font-weight-bold" style="font-size: 16px; color:#364D59;"><%= post.user.name %>
+                                    <% if post.content != "" %>
+                                        <span class="font-weight-normal pl-3"><%= post.content %></span>
+                                    <% end %>
+                                    </p>
+                                    <p class= "text-capitalize small text-justify pl-3"><%= time_ago_in_words(post.created_at) %></p>
+                                    
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+

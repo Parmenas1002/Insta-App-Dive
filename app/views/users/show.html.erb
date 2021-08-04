@@ -1,0 +1,58 @@
+<div class= "container mt-5">
+    <div class="row justify-content-center align-content-center">
+        <div class="col-md-10 text-center">
+            <div class="profile-img">
+                <% if @user.image && @user.image.url%>
+                    <%= image_tag(@user.image.url)%>
+                <%else%>
+                    <%= image_tag "default.png", width: 100, class: "rounded-circle" %> 
+                <% end %>
+            </div>
+            <p class="text-downcase semi-info font-weight-bold mt-2"><%= @user.name %></p>
+            <p class="text-downcase text-dark font-weight-bold mt-3"><%= @user.posts.count %> Post(s) <span class="ml-3"> <%= @user.favorites.count %> Favorites Post(s) <%= link_to  'Edit profile', edit_user_path(@user.id), class: "edit-link ml-3"%><span> </p>
+        <div class="dropdown-divider mt-5"></div>
+        </div>
+    </div>
+    <div class="row justify-content-center align-content-center mt-3">
+        <div class="col-md-10 text-center">
+            <ul class="tab nav justify-content-center">
+                <li class="select nav-item">Posts</li>
+                <li class="nav-item">Favorites Posts</li>
+            </ul>
+            
+            <div class="content mt-4">
+                <div class="list-posts row justify-content-center">
+                    
+                    <% @user.posts.each do |post|%>
+                        <div class= "col-md-4">
+                            <%= image_tag(post.image.url) %>
+                        </div>
+                        
+                    <% end %>
+                </div>
+                <div class=" list-posts hide row justify-content-center">
+                    <% @user.favorites_posts.each do |post|%>
+                        <div class= "col-md-4">
+                            <%= image_tag(post.image.url)%>
+                        </div>
+                    <% end %>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    $(function(){
+    $('.tab li').on('click',function(){
+        $('.tab li').removeClass('select');
+        $(this).addClass('select');
+        $('.content .list-posts').addClass('hide');
+        let index = $('.tab li').index($(this))
+        $('.content .list-posts').eq(index).removeClass('hide')
+    });
+});
+</script>

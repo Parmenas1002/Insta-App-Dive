@@ -1,0 +1,57 @@
+<% if @user.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show pt-2 pb-2 text-center">
+        
+        <% @user.errors.full_messages.each do |msg| %>
+            <p><%= msg %></p>
+        <% end %>
+        
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% end %>
+<div class="container mt-5">
+    <div class="row justify-content-center align-content-center mt-5 ">
+        <div class= "col-md-8">
+            <div class="card p-3 mb-3 bg-white" >
+                <div class="card-body">
+                <div class=" row justify-content-center">
+                    <div class= "col-md-8">
+                        <div class="profile-img text-center">
+                            <% if @user.image && @user.image.url%>
+                                <%= image_tag (@user.image.url), id: "user-avatar" %>
+                            <%else%>
+                                <%= image_tag "default.png", width: 100, class: "rounded-circle", id: "user-avatar" %> 
+                            <% end %>
+                            <p class="text-downcase semi-info font-weight-bold mt-2"><%= @user.name %></p>
+                        </div>
+                        
+                        <%= form_with(model: @user, local: true) do |form| %>
+                        <div class= "form-group mt-3 text-center image-text">
+                            <%= form.label :image ,"Edit profile photo"%>
+                            <%= form.file_field :image, class: "input-image", onchange: "document.getElementById('user-avatar').src = window.URL.createObjectURL(this.files[0])" %>
+                            <%= form.hidden_field :image_cache %>
+                        </div>
+                        <div class="form-group">
+                            <%= form.label :name %><%= form.text_field :name, class: "form-control"%>
+                        </div>
+                        <div class="form-group">
+                            <%= form.label :email %><%= form.text_field :email, class: "form-control"%>
+                        </div>
+                        
+                        
+                        <div class="row justify-content-center mb-3 mt-5">
+                            <div class="col-md-12 text-center">
+                                <%= form.submit "Save Profile", class:"btn btn-primary font-weight-bold pl-5 pr-5" %>
+                            </div>
+                        </div>
+                         
+                    <% end %>
+                    </div>
+                </div>
+                    
+                </div>  
+            </div>
+        </div> 
+    </div>
+</div>
