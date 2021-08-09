@@ -1,0 +1,56 @@
+<div class="container mt-5">
+    <div class="row justify-content-around align-content-center ">
+        <div class= "col-lg-3 col-md-5">
+            <div class="row justify-content-center align-content-center ">
+            <% if @products.count > 0  %>
+                <% @products.each do |product| %>
+                    <div class= "col-md-12 pl-5 pr-5">
+                        <div class="card mb-5 bg-white" >
+                            <div class="card-header pl-4 pb-0" style="border: none; background-color:white;">
+                                <div class="row justify-content-between align-content-center">
+                                    <div class= "col-md-4 pl-3 pr-3">
+                                        <% if product.user.image && product.user.image.url%>
+                                            <%= image_tag (product.user.image.url), class: "rounded-circle" %> <span class="pl-2 font-weight-bold" style="font-size: 16px; color:#364D59;"><%= product.user.name %></span>
+                                        <%else%>
+                                            <%= image_tag "default.png", width: 100, class: "rounded-circle" %> <span class="pl-2 font-weight-bold" style="font-size: 16px; color:#364D59;"><%= product.user.name %></span>
+                                        <% end %>
+                                    </div>
+                                    <div class= "col-md-6 pt-4">
+                                        <ul class="nav justify-content-end ">
+                                            <li class="nav-item pr-3 ">
+                                                <%= link_to  'Details' , product_path(product.id), class: "card-menu-link"   %>
+                                            </li>
+                                            <% if product.user_id == current_user.id %>
+                                                <li class="nav-item pr-3 ">
+                                                    <%= link_to  'Edit' , edit_product_path(product.id), class: "card-menu-link"  %>
+                                                </li>
+                                                <li><%= link_to  'Delete' , product_path(product.id), method: :delete , data: { confirm: 'Are you sure to delete'}, class: "card-menu-link" %></li>
+                                            <% end %>   
+                                        </ul> 
+                                    </div>
+                                </div> 
+                            </div>                           
+                            <div class="card-body p-0 mt-3">
+                                <div class="text-center">
+                                    <%= image_tag (product.image.url), class: "product-img" %>
+                                    
+                                    <p class="text-justify pl-3 mt-3">
+                                    <span class=" font-weight-bold" style="font-size: 16px; color:#364D59;"><%= product.user.name %>
+                                    <% if product.content != "" %>
+                                        <span class="font-weight-normal pl-3"><%= product.content %></span>
+                                    <% end %>
+                                    </p>
+                                    <p class= "text-capitalize small text-justify pl-3"><%= time_ago_in_words(product.created_at) %></p>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                <% end %>
+            <%else%>
+                <h1> Aucun produit ajouté actuellement</h1>
+            <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
