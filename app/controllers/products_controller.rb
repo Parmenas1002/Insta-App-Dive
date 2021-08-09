@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
             render :new
         else
             if @product.save
-                redirect_to products_path, notice: "New product create with success"
+                redirect_to products_path, notice: "New product create with success. This is my first pull request."
             else
                 render :new
             end
